@@ -9,27 +9,77 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Background Information
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The abstract of this paper explains that we need information of the relationships between predator and prey size in order to understand how species and size classes interact within food webs.
+This data contains almost 35,000 records from a range of environments and locations, for a  vast range of predator sizes - from 0.1 milligrams to 415 kilograms, and prey sizes from 75 picograms to over 4.5 kilograms. Information about the species such as location, scientific name, life stage and habitat description is also included.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Importing the Data 
 
-```{r cars}
-summary(cars)
+Firstly, I had to download the text file containing the data from the Barnes et al study. Then I converted it to a .csv file in Excel. In this code, we import the libraries tidyverse and lubridate in case we want to use them in future, for example to use ggplot or standardise dates. Then we import the data file into R and save it to the pred_prey_data dataframe.
+```{r, eval=FALSE}
+library(tidyverse)
+library(lubridate) 
+```
+```{r}
+pred_prey_data <- read.csv("Predator_and_prey_body_sizes_in_marine_food_webs_vsn4_csvcopy.csv")
 ```
 
-## Including Plots
+## Starting to look at the data 
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+Plotting masses of the prey masses shows the variation in the data.
+```{r}
+plot(pred_prey_data$Prey.mass)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+This graph shows that most of the data entries are under 1000 units for Prey.mass, however some of them are over 4000 units. We can view the units for this variable:
+```{r}
+unique(pred_prey_data$Prey.mass.unit)
+unique(pred_prey_data$Predator.mass.unit)
+```
+Which shows that for Prey Mass as in the graph above, some masses are measured in milligrams but some are measured in grams. Fortunately, for Predator Mass all units are in grams. Ideally we would like to get all measurements in the same unit (grams) for fair comparison in graphs. In the code below, we multiply any Prey Mass measurement that is in milligrams by 0.001 to convert it to grams. We then set the mass unit value to grams for these to "g" so this is accurate.
+```{r}
+pred_prey_data$Prey.mass[pred_prey_data$Prey.mass.unit == "mg"] <- 0.001*pred_prey_data$Prey.mass[pred_prey_data$Prey.mass.unit == "mg"]
+pred_prey_data$Prey.mass.unit[pred_prey_data$Prey.mass.unit == "mg"] <- "g"
+```
+We can now see that all measurements for Prey mass are in grams:
+```{r}
+unique(pred_prey_data$Prey.mass.unit) #shows now all in grams
+  
+```
+We have now got data on predator/prey masses we can work with for comparisons.
 
+## Predator and Prey Mass data
 
+Now assign the data for Predator and Prey mass in grams to new data frames:
+```{r}
+pred_mass_g <-pred_prey_data$Predator.mass #all in grams anyway
+prey_mass_g <-pred_prey_data$Prey.mass # now all converted to grams
+```
+We can view summaries of the data for Predator Mass and Prey Mass:
+```{r}
+summary(pred_mass_g)
+```
+```{r}
+plot(pred_mass_g)
+```
+
+This shows that whilst the average predator has a mass of about 15,000g, there are some predators that have a mass of up to 415,600g.
+
+Now if we wanted to compare the mass of a predator with the mass of its prey, we could do this using the plot function:  
+```{r}
+plot(x= prey_mass_g, y= pred_mass_g)
+```
+
+Its hard to draw conclusions from this graph because of the scale of the graph - most values are clustered towards the lower end of the mass scale. 
+If we take the log of both sides, this should represent the data in a better way visually:
+
+```{r}
+plot(x= log(prey_mass_g), y= log(pred_mass_g)) # log of both sides
+title(main = "Log Plot of Predator-Prey Masses" )
+```
+
+As we can see from this graph, there appears to be a positive correlation between the log of predator mass and the log of prey mass.
 
 
 
