@@ -1,8 +1,11 @@
 ---
-title: "Barnes et al: Predator and Prey Bodysizes in Marine Food Webs"
+title: 'Barnes et al: Predator and Prey Bodysizes in Marine Food Webs'
 author: "Felix Carter"
 date: "27/10/2020"
-output: html_document
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -16,10 +19,9 @@ This data contains almost 35,000 records from a range of environments and locati
 
 ## Importing the Data 
 
-Firstly, I had to download the text file containing the data from the Barnes et al study. Then I converted it to a .csv file in Excel. In this code, we import the libraries tidyverse and lubridate in case we want to use them in future, for example to use ggplot or standardise dates. Then we import the data file into R and save it to the pred_prey_data dataframe.
-```{r, eval=FALSE}
+Firstly, I had to download the text file containing the data from the Barnes et al study(the data can be found at https://figshare.com/articles/dataset/Full_Archive/3529112). Then I converted it to a .csv file in Excel. In this code, we import the library tidyverse to use its features (including ggplot) in the future. Then we import the data file into R and save it to the pred_prey_data dataframe.
+```{r, eval=TRUE, results='hide'}
 library(tidyverse)
-library(lubridate) 
 ```
 ```{r}
 pred_prey_data <- read.csv("Predator_and_prey_body_sizes_in_marine_food_webs_vsn4_csvcopy.csv")
@@ -66,20 +68,27 @@ plot(pred_mass_g)
 
 This shows that whilst the average predator has a mass of about 15,000g, there are some predators that have a mass of up to 415,600g.
 
-Now if we wanted to compare the mass of a predator with the mass of its prey, we could do this using the plot function:  
+Now if we wanted to compare the mass of a predator with the mass of its prey, we could do this using the ggplot function, which has more features than the inbuilt plot function:  
 ```{r}
-plot(x= prey_mass_g, y= pred_mass_g)
+pred_prey_data %>%
+  ggplot(aes(x= prey_mass_g, y= pred_mass_g)) +
+  geom_point()
 ```
 
-Its hard to draw conclusions from this graph because of the scale of the graph - most values are clustered towards the lower end of the mass scale. 
+Its hard to draw conclusions from this graph because of the scale of the graph - most values are clustered towards the lower end of the mass scale.
 If we take the log of both sides, this should represent the data in a better way visually:
 
 ```{r}
-plot(x= log(prey_mass_g), y= log(pred_mass_g)) # log of both sides
-title(main = "Log Plot of Predator-Prey Masses" )
+pred_prey_data %>%
+  ggplot(aes(x= log(prey_mass_g), y= log(pred_mass_g))) +
+  geom_point(shape=20) +
+  ggtitle("Log-Log Plot of Predator-Prey Masses") +
+  xlab("log(Prey Mass (g))") +
+  ylab("log(Predator Mass (g))")
 ```
 
-As we can see from this graph, there appears to be a positive correlation between the log of predator mass and the log of prey mass.
+(Note we have added titles and labels to the graph, and made the scatterpoints smaller so they can be differentiated more easily).
+As we can see from this graph, there appears to be a correlation between the natural logarithm of predator mass and the natural logarithm of prey mass. This implies that the masses follow a power law relationship, i.e the function is of the form y=a*x^b.
 
 
 

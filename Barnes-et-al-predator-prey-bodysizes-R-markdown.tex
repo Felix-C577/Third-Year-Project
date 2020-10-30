@@ -1,0 +1,307 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Barnes et al: Predator and Prey Bodysizes in Marine Food Webs},
+  pdfauthor={Felix Carter},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Barnes et al: Predator and Prey Bodysizes in Marine Food Webs}
+\author{Felix Carter}
+\date{27/10/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{background-information}{%
+\subsection{Background Information}\label{background-information}}
+
+The abstract of this paper explains that we need information of the
+relationships between predator and prey size in order to understand how
+species and size classes interact within food webs. This data contains
+almost 35,000 records from a range of environments and locations, for a
+vast range of predator sizes - from 0.1 milligrams to 415 kilograms, and
+prey sizes from 75 picograms to over 4.5 kilograms. Information about
+the species such as location, scientific name, life stage and habitat
+description is also included.
+
+\hypertarget{importing-the-data}{%
+\subsection{Importing the Data}\label{importing-the-data}}
+
+Firstly, I had to download the text file containing the data from the
+Barnes et al study(the data can be found at
+\url{https://figshare.com/articles/dataset/Full_Archive/3529112}). Then
+I converted it to a .csv file in Excel. In this code, we import the
+library tidyverse to use its features (including ggplot) in the future.
+Then we import the data file into R and save it to the pred\_prey\_data
+dataframe.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages ------------------------------------------------------- tidyverse 1.3.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.2     v purrr   0.3.4
+## v tibble  3.0.3     v dplyr   1.0.1
+## v tidyr   1.1.1     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.5.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ---------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred_prey_data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Predator_and_prey_body_sizes_in_marine_food_webs_vsn4_csvcopy.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{starting-to-look-at-the-data}{%
+\subsection{Starting to look at the
+data}\label{starting-to-look-at-the-data}}
+
+Plotting masses of the prey masses shows the variation in the data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Barnes-et-al-predator-prey-bodysizes-R-markdown_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+This graph shows that most of the data entries are under 1000 units for
+Prey.mass, however some of them are over 4000 units. We can view the
+units for this variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{unique}\NormalTok{(pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass.unit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "g"  "mg"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{unique}\NormalTok{(pred_prey_data}\OperatorTok{$}\NormalTok{Predator.mass.unit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "g"
+\end{verbatim}
+
+Which shows that for Prey Mass as in the graph above, some masses are
+measured in milligrams but some are measured in grams. Fortunately, for
+Predator Mass all units are in grams. Ideally we would like to get all
+measurements in the same unit (grams) for fair comparison in graphs. In
+the code below, we multiply any Prey Mass measurement that is in
+milligrams by 0.001 to convert it to grams. We then set the mass unit
+value to grams for these to ``g'' so this is accurate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass[pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass.unit }\OperatorTok{==}\StringTok{ "mg"}\NormalTok{] <-}\StringTok{ }\FloatTok{0.001}\OperatorTok{*}\NormalTok{pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass[pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass.unit }\OperatorTok{==}\StringTok{ "mg"}\NormalTok{]}
+\NormalTok{pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass.unit[pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass.unit }\OperatorTok{==}\StringTok{ "mg"}\NormalTok{] <-}\StringTok{ "g"}
+\end{Highlighting}
+\end{Shaded}
+
+We can now see that all measurements for Prey mass are in grams:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{unique}\NormalTok{(pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass.unit) }\CommentTok{#shows now all in grams}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "g"
+\end{verbatim}
+
+We have now got data on predator/prey masses we can work with for
+comparisons.
+
+\hypertarget{predator-and-prey-mass-data}{%
+\subsection{Predator and Prey Mass
+data}\label{predator-and-prey-mass-data}}
+
+Now assign the data for Predator and Prey mass in grams to new data
+frames:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred_mass_g <-pred_prey_data}\OperatorTok{$}\NormalTok{Predator.mass }\CommentTok{#all in grams anyway}
+\NormalTok{prey_mass_g <-pred_prey_data}\OperatorTok{$}\NormalTok{Prey.mass }\CommentTok{# now all converted to grams}
+\end{Highlighting}
+\end{Shaded}
+
+We can view summaries of the data for Predator Mass and Prey Mass:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(pred_mass_g)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0     172    1751   15292    6326  415600
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(pred_mass_g)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Barnes-et-al-predator-prey-bodysizes-R-markdown_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+This shows that whilst the average predator has a mass of about 15,000g,
+there are some predators that have a mass of up to 415,600g.
+
+Now if we wanted to compare the mass of a predator with the mass of its
+prey, we could do this using the ggplot function, which has more
+features than the inbuilt plot function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred_prey_data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{ prey_mass_g, }\DataTypeTok{y=}\NormalTok{ pred_mass_g)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Barnes-et-al-predator-prey-bodysizes-R-markdown_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+Its hard to draw conclusions from this graph because of the scale of the
+graph - most values are clustered towards the lower end of the mass
+scale. If we take the log of both sides, this should represent the data
+in a better way visually:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred_prey_data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=} \KeywordTok{log}\NormalTok{(prey_mass_g), }\DataTypeTok{y=} \KeywordTok{log}\NormalTok{(pred_mass_g))) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{shape=}\DecValTok{20}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Log-Log Plot of Predator-Prey Masses"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"log(Prey Mass (g))"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"log(Predator Mass (g))"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Barnes-et-al-predator-prey-bodysizes-R-markdown_files/figure-latex/unnamed-chunk-11-1.pdf}
+
+(Note we have added titles and labels to the graph, and made the
+scatterpoints smaller so they can be differentiated more easily). As we
+can see from this graph, there appears to be a correlation between the
+natural logarithm of predator mass and the natural logarithm of prey
+mass. This implies that the masses follow a power law relationship, i.e
+the function is of the form y=a*x\^{}b.
+
+\end{document}
