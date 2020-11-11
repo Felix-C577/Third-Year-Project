@@ -19,7 +19,7 @@ This data contains almost 35,000 records from a range of environments and locati
 
 ## Importing the Data 
 
-Firstly, I had to download the text file containing the data from the Barnes et al study(the data can be found at https://figshare.com/articles/dataset/Full_Archive/3529112). Then I converted it to a .csv file in Excel. In this code, we import the library tidyverse to use its features (including ggplot) in the future. Then we import the data file into R and save it to the pred_prey_data dataframe.
+Firstly, I had to download the text file containing the data from the 2008 Barnes et al. study(the data can be found at https://figshare.com/articles/dataset/Full_Archive/3529112). Then I converted it to a .csv file in Excel. In this code, we import the library tidyverse to use its features (including ggplot) in the future. Then we import the data file into R and save it to the pred_prey_data dataframe.
 ```{r, eval=TRUE, results='hide'}
 library(tidyverse)
 ```
@@ -89,9 +89,50 @@ pred_prey_data %>%
 
 (Note we have added titles and labels to the graph, and made the scatterpoints smaller so they can be differentiated more easily).
 As we can see from this graph, there appears to be a correlation between the natural logarithm of predator mass and the natural logarithm of prey mass. This implies that the masses follow a power law relationship, i.e the function is of the form y=a*x^b.
+We can also see that the data appears to be in two distinct 'clusters' - one at the lower end of the log-log scale, and one at the higher end.
+
+Viewing Fig. 1 of the metadata file that accompanied the data, we see that they plotted a log10-log10 graph rather than using natural logarithms, so we can do this in  future.
+
+Now, lets try and infer the power law relationship from this data.
+```{r}
+log10fit=lm(log10(pred_mass_g)~log10(prey_mass_g),data=pred_prey_data)
+summary(log10fit)
+```
+
+Reading off the summary, we see that the Intercept value = 2.921741, and the log10(prey_mass_g) intercept is 0.656835. This suggests log10(Predator Mass) = log10(2.921741) + 0.656835log10(Prey Mass). 
+Therefore if this is correct then the power law relationship would be 
+Predator Mass = 2.921741(Prey Mass)^0.656835
+
+We can add this line to our logarithmic graph (in red), as well as a 1:1 line (in black) for visual purposes.
+```{r}
+pred_prey_data %>%
+  ggplot(aes(x= log10(prey_mass_g), y= log10(pred_mass_g))) +
+  geom_point(shape=20) +
+  ggtitle("Log-Log Plot of Predator-Prey Masses (Base 10 logarithms)") +
+  xlab("log10(Prey Mass (g))") +
+  ylab("log10(Predator Mass (g))") +
+  geom_abline(aes(slope = 1,intercept = 0)) +
+  geom_abline(aes(slope = 0.656835,intercept = 2.921741, color="red"), show.legend=FALSE) 
+  
+
+```
+The line in red for the logarithmic version of the power law relationship does seem to fit our dataset, suggesting that this is a good approximate law for this data.
+
+The metadata file for the 2008 Barnes et al. study that this dataset is from states that about 99.4% of data is above the 1:1 line (or below if plotting prey mass on y axis, predator mass on x axis). We can see on the graph above that almost all of our datapoints are above the black 1:1 line so follow this relationship. This is to be expected - the mass of the predator is almost always greater than the mass of the prey.
 
 
-
-
-
+## Looking at Barnes et al.'s 2010 study using the same data
+Looking at a similar paper from two years later, also from Barnes et al., "Global patterns in predator—prey size relationships reveal size dependency of trophic transfer efficiency" (https://www.jstor.org/stable/25661038) reveals the significance of the Predator-Prey Mass Ratio (PPMR), which isn't a variable in the dataset we are currently interpreting. However, this 2010 paper uses this dataset to draw its conclusions, and we can calculate (individual-link) PPMR by dividing predator mass by prey mass as follows:
+```{r}
+PPMR <- pred_mass_g/prey_mass_g
+```
+In the 2010 Barnes et al. study, they plotted PPMR against predator mass, like this:
+```{r}
+pred_prey_data %>%
+  ggplot(aes(x= log10(pred_mass_g), y= log10(PPMR))) +
+  geom_point(shape=20) +
+  ggtitle("Predator Mass against PPMR") +
+  xlab("log10(Predator Mass (g))") +
+  ylab("log10(Individual-link PPMR)")
+```
 
