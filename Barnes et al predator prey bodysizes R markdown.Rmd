@@ -71,7 +71,7 @@ This shows that whilst the average predator has a mass of about 15,000g, there a
 Now if we wanted to compare the mass of a predator with the mass of its prey, we could do this using the ggplot function, which has more features than the inbuilt plot function:  
 ```{r}
 pred_prey_data %>%
-  ggplot(aes(x= prey_mass_g, y= pred_mass_g)) +
+  ggplot(aes(x= pred_mass_g, y= prey_mass_g)) +
   geom_point()
 ```
 
@@ -80,11 +80,11 @@ If we take the log of both sides, this should represent the data in a better way
 
 ```{r}
 pred_prey_data %>%
-  ggplot(aes(x= log(prey_mass_g), y= log(pred_mass_g))) +
+  ggplot(aes(x= log(pred_mass_g), y= log(prey_mass_g))) +
   geom_point(shape=20) +
   ggtitle("Log-Log Plot of Predator-Prey Masses") +
-  xlab("log(Prey Mass (g))") +
-  ylab("log(Predator Mass (g))")
+  xlab("log(Predator Mass (g))") +
+  ylab("log(Prey Mass (g))")
 ```
 
 (Note we have added titles and labels to the graph, and made the scatterpoints smaller so they can be differentiated more easily).
@@ -95,30 +95,30 @@ Viewing Fig. 1 of the metadata file that accompanied the data, we see that they 
 
 Now, lets try and infer the power law relationship from this data.
 ```{r}
-log10fit=lm(log10(pred_mass_g)~log10(prey_mass_g),data=pred_prey_data)
+log10fit=lm(log10(prey_mass_g)~log10(pred_mass_g),data=pred_prey_data)
 summary(log10fit)
 ```
 
-Reading off the summary, we see that the Intercept value = 2.921741, and the log10(prey_mass_g) intercept is 0.656835. This suggests log10(Predator Mass) = log10(2.921741) + 0.656835log10(Prey Mass). 
+Reading off the summary, we see that the Intercept value = 3.082167, and the log10(pred_mass_g) intercept is 1.014350. This suggests log10(Prey Mass) = 1.014350log10(Predator Mass) -3.082167. 
 Therefore if this is correct then the power law relationship would be 
-Predator Mass = 2.921741(Prey Mass)^0.656835
+Prey Mass = 0.000826767(Prey Mass)^1.01435
 
 We can add this line to our logarithmic graph (in red), as well as a 1:1 line (in black) for visual purposes.
 ```{r}
 pred_prey_data %>%
-  ggplot(aes(x= log10(prey_mass_g), y= log10(pred_mass_g))) +
+  ggplot(aes(x= log10(pred_mass_g), y= log10(prey_mass_g))) +
   geom_point(shape=20) +
   ggtitle("Log-Log Plot of Predator-Prey Masses (Base 10 logarithms)") +
-  xlab("log10(Prey Mass (g))") +
-  ylab("log10(Predator Mass (g))") +
+  xlab("log10(Predator Mass (g))") +
+  ylab("log10(Prey Mass (g))") +
   geom_abline(aes(slope = 1,intercept = 0)) +
-  geom_abline(aes(slope = 0.656835,intercept = 2.921741, color="red"), show.legend=FALSE) 
+  geom_abline(aes(slope = 1.014350,intercept = -3.082167, color="red"), show.legend=FALSE) 
   
 
 ```
 The line in red for the logarithmic version of the power law relationship does seem to fit our dataset, suggesting that this is a good approximate law for this data.
 
-The metadata file for the 2008 Barnes et al. study that this dataset is from states that about 99.4% of data is above the 1:1 line (or below if plotting prey mass on y axis, predator mass on x axis). We can see on the graph above that almost all of our datapoints are above the black 1:1 line so follow this relationship. This is to be expected - the mass of the predator is almost always greater than the mass of the prey.
+The metadata file for the 2008 Barnes et al. study that this dataset is from states that about 99.4% of data is below the 1:1 line. We can see on the graph above that almost all of our datapoints are below the black 1:1 line so follow this relationship. This is to be expected - the mass of the predator is almost always greater than the mass of the prey.
 
 
 ## Looking at Barnes et al.'s 2010 study using the same data
