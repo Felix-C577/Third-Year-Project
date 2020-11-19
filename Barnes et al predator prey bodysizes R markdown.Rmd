@@ -101,6 +101,7 @@ summary(log10fit)
 
 Reading off the summary, we see that the Intercept value = 3.082167, and the log10(pred_mass_g) intercept is 1.014350. This suggests log10(Prey Mass) = 1.014350log10(Predator Mass) -3.082167. 
 Therefore if this is correct then the power law relationship would be 
+
 Prey Mass = 0.000826767(Predator Mass)^1.01435
 
 We can add this line to our logarithmic graph (in red), as well as a 1:1 line (in black) for visual purposes.
